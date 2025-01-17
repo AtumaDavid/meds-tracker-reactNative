@@ -11,6 +11,7 @@ import Color from "@/Constant/Color";
 import { useRouter } from "expo-router";
 import { auth } from "@/config/FirebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { setLocalStorage } from "@/service/storage";
 
 export default function signin() {
   const router = useRouter();
@@ -24,11 +25,12 @@ export default function signin() {
       return;
     }
     signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      .then(async (userCredential) => {
         // Signed in
         const user = userCredential.user;
         console.log(user);
 
+        await setLocalStorage("userDetail", user);
         router.replace("/(tabs)");
 
         // ...
