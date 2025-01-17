@@ -1,5 +1,7 @@
+import { auth } from "@/config/FirebaseConfig";
 import { Redirect } from "expo-router";
-import { Text, View } from "react-native";
+import { signOut } from "firebase/auth";
+import { Button, Text, View } from "react-native";
 
 export default function HomeScreen() {
   return (
@@ -10,7 +12,8 @@ export default function HomeScreen() {
         alignItems: "center",
       }}
     >
-      <Text>Edit app/index.tsx to edit this screen....</Text>
+      <Text>Edit app/index.tsx to edit this screen</Text>
+      <Button title="Logout" onPress={() => signOut(auth)} />
       {/* <Redirect href={"/login"} /> */}
     </View>
   );
